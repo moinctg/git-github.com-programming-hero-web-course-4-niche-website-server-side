@@ -85,8 +85,10 @@ async function run() {
   app.post("/addUserInfo", async (req, res) => {
     console.log("req.body");
     const result = await usersCollection.insertOne(req.body);
-    res.send(result);
     console.log(result);
+    res.json(result)
+    
+    
   });
   //  make admin
 
