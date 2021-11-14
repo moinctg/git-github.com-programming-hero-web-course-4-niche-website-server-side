@@ -83,13 +83,24 @@ async function run() {
   });
 
   app.post("/addUserInfo", async (req, res) => {
-    console.log("req.body");
-    const result = await usersCollection.insertOne(req.body);
+   const user = req.body;
+    const result = await usersCollection.insertOne(user);
     console.log(result);
     res.json(result)
     
     
   });
+
+  app.put("/addUserInfo", async(req,res)=>{
+
+    const user = req.body;
+    const filter = {email:user.email};
+    const option = {upsert:true};
+    const updateDoc = {$set:user};
+    const result =  await usersCollection.updateOne(filter,updateDoc,option);
+    res.json(result);
+  })
+
   //  make admin
 
   app.put("/makeAdmin", async (req, res) => {
