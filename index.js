@@ -75,6 +75,7 @@ async function run() {
       .toArray();
     res.send(result);
   });
+  
 
   // review
   app.post("/addSReview", async (req, res) => {
@@ -137,6 +138,22 @@ async function run() {
     const result = await ordersCollection.find({}).toArray();
     res.send(result);
   });
+  /// all Review page
+  app.get("/allReview", async (req, res) => {
+    // console.log("hello");
+    const result = await reviewCollection.find({}).toArray();
+    res.send(result);
+  });
+
+
+
+  // Order Api Delete
+  app.delete('/allOrders/:id', async (req, res) => {
+    const id = req.params.id;
+    const query = { _id: ObjectId(id) };
+    const result = await ordersCollection.deleteOne(query);
+    res.json(result);
+})
 
   // status update
   app.put("/statusUpdate/:id", async (req, res) => {
