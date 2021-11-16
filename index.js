@@ -153,6 +153,7 @@ async function run() {
     const query = { _id: ObjectId(id) };
     const result = await ordersCollection.deleteOne(query);
     res.json(result);
+    console.log(result);
 })
 
   // status update
@@ -167,17 +168,18 @@ async function run() {
     res.send(result);
     // console.log(result);
   });
-  app.delete("/delete/:id", async (req, res) => {
-    const filter = { _id: ObjectId(req.params.id) };
-    // console.log(req.params.id);
-    const result = await ordersCollection.updateOne(filter, {
-      $set: {
-        status: req.body.status,
-      },
-    });
-    res.send(result);
-    // console.log(result);
-  });
+
+  // app.delete("/delete/:id", async (req, res) => {
+  //   const filter = { _id: ObjectId(req.params.id) };
+  //   // console.log(req.params.id);
+  //   const result = await ordersCollection.updateOne(filter, {
+  //     $set: {
+  //       status: req.body.status,
+  //     },
+  //   });
+  //   res.send(result);
+  //   // console.log(result);
+  // });
 
 
 // app.listen(process.env.PORT || 5000);
