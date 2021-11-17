@@ -49,6 +49,14 @@ async function run() {
     res.send(result);
   });
 
+  app.delete('/allServices/:id', async (req, res) => {
+    const id = req.params.id;
+    const query = { _id: ObjectId(id) };
+    const result = await servicesCollection.deleteOne(query);
+    res.json(result);
+    console.log(result);
+})
+
   // single service
   app.get("/singleService/:id", async (req, res) => {
     // console.log(req.params.id);
