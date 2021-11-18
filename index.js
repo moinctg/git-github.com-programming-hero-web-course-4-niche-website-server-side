@@ -45,9 +45,16 @@ async function run() {
 
   // get all services
   app.get("/allServices", async (req, res) => {
-    const result = await servicesCollection.find({}).toArray();
+    const cursor = servicesCollection.find({});
+    const result = await cursor.limit(6).toArray();
     res.send(result);
   });
+  app.get("/allService", async (req, res) => {
+    const cursor = servicesCollection.find({});
+    const result = await cursor.toArray();
+    res.send(result);
+  });
+
 
   app.delete('/allservicesdelete/:id', async (req, res) => {
     const id = req.params.id;
@@ -158,8 +165,18 @@ async function run() {
 
 
 
-  // Order Api Delete
+  // ALL Order Api Delete
   app.delete('/allOrders/:id', async (req, res) => {
+    const id = req.params.id;
+    const query = { _id: ObjectId(id) };
+    const result = await ordersCollection.deleteOne(query);
+    res.json(result);
+    console.log(result);
+})
+
+  //  My Orders Delete API
+
+  app.delete('/myOrder/:id', async (req, res) => {
     const id = req.params.id;
     const query = { _id: ObjectId(id) };
     const result = await ordersCollection.deleteOne(query);
