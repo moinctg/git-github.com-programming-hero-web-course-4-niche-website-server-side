@@ -72,6 +72,7 @@ async function run() {
   app.post("/addOrders", async (req, res) => {
     const result = await ordersCollection.insertOne(req.body);
     res.send(result);
+    console.log(result);
   });
 
   //  my order
@@ -86,9 +87,10 @@ async function run() {
   
 
   // review
-  app.post("/addSReview", async (req, res) => {
+  app.post("/addReview", async (req, res) => {
     const result = await reviewCollection.insertOne(req.body);
     res.send(result);
+    console.log(result)
   });
 
   app.post("/addUserInfo", async (req, res) => {
@@ -138,6 +140,7 @@ async function run() {
       .toArray();
     // console.log(result);
     res.send(result);
+    console.log(result);
   });
 
   /// all order
